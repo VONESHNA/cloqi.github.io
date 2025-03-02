@@ -95,11 +95,12 @@
         public static function saveCategory($data){
             $con            =   $data['con'];
             $name           =   $data['name'];
+            $img            =   $data['img'];
             $description    =   $data['description'];
             $created        =   $data['created'];
             $tbl            =   self::$categorytbl;
-            $fields         =   '`name`,`description`, `created`';
-            $rows           =   '"'.$name.'","'.$description.'","'.$created.'"';
+            $fields         =   '`name`,`img`,`description`, `created`';
+            $rows           =   '"'.$name.'", "'.$img.'", "'.$description.'","'.$created.'"';
             $q              =   "INSERT INTO ".$tbl."(".$fields.") VALUES (".$rows.")";
             $mq             =   mysqli_query($con, $q);
             $lastin         =   mysqli_insert_id($con);
@@ -111,11 +112,12 @@
             $con            =   $data['con'];
             $edit           =   $data['edit'];
             $name           =   $data['name'];
+            $img            =   $data['img'];
             $description    =   $data['description'];
             $updated        =   $data['created'];
             $tbl            =   self::$categorytbl;
             $where="WHERE id='".$edit."'";
-            $r=mysqli_query($con,"UPDATE  $tbl SET  `name`='".$name."' , `description`='".$description."', `updated`='".$updated."' $where");
+            $r=mysqli_query($con,"UPDATE  $tbl SET  `name`='".$name."' ,  `img`='".$img."' , `description`='".$description."', `updated`='".$updated."' $where");
             return $r;
 
         }
@@ -176,7 +178,7 @@
             $tbl            =   self::$productbl;
             $categorytbl    =   self::$categorytbl;
 
-            $q="SELECT product.*,  category.name AS categoryname FROM ".$tbl." JOIN  ".$categorytbl." ON ".$tbl.".category=".$categorytbl.".id WHERE ".$tbl.".category=$catid.";
+            $q="SELECT product.*,  category.name AS categoryname, category.img AS categoryimage FROM ".$tbl." JOIN  ".$categorytbl." ON ".$tbl.".category=".$categorytbl.".id WHERE ".$tbl.".category=$catid.";
             
             $qr=mysqli_query($con,$q);
             $n=mysqli_num_rows($qr);

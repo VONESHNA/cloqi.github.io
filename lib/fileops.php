@@ -112,10 +112,18 @@ class Fileops{
         }else{$fnames=[];return $fnames;}
 
     }
-    public static function fileup($control) {//multiple as per need
+    public static function fileup($control) {//multiple as per need// enctype="multipart/form-data"
         $control='photo';
         $updir = '../uploads/office-bearer/';
         $prefix = 'ofb-';
+        $extention=['png','jpg', 'jpeg'];
+        return  static::uploadfile($control, $extention, $updir, $prefix); 
+    }
+
+        public static function categoryimageup($control) {//multiple as per need
+        $control=$control;
+        $updir = '../uploads/category/';
+        $prefix = 'category-';
         $extention=['png','jpg', 'jpeg'];
         return  static::uploadfile($control, $extention, $updir, $prefix); 
     }
