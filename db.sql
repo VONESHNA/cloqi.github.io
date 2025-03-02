@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2025 at 10:00 AM
+-- Generation Time: Mar 02, 2025 at 12:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -49,7 +49,8 @@ CREATE TABLE `bill` (
 
 INSERT INTO `bill` (`id`, `created`, `updated`, `customer`, `firstname`, `lastname`, `email`, `contact`, `address`, `city`, `pincode`, `landmark`, `billtoken`) VALUES
 (1, '2025-02-16 08:37:40', NULL, '1', '', '', '', '', '', '', '', '', '1'),
-(2, '2025-02-16 08:47:02', NULL, '1', '', '', '', '8907896789', '456, street 10', 'Los Angeles', '123456', 'tree house', '2');
+(2, '2025-02-16 08:47:02', NULL, '1', '', '', '', '8907896789', '456, street 10', 'Los Angeles', '123456', 'tree house', '2'),
+(3, '2025-03-02 07:40:25', NULL, '5', 'Malini', 'Mehta', 'metha@mail.co', '1234567890', 'test address', 'LA', '123456', 'Tree House', '3');
 
 -- --------------------------------------------------------
 
@@ -67,6 +68,13 @@ CREATE TABLE `carts` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `created`, `updated`, `customer`, `product`, `size`, `quantity`) VALUES
+(6, '2025-03-02 11:19:54', NULL, 0, 6, 'XL                                                  <input type=\"hidden\" id=\"size\" value=\"XL\">', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +86,7 @@ CREATE TABLE `category` (
   `created` timestamp NULL DEFAULT NULL,
   `updated` timestamp NULL DEFAULT NULL,
   `name` varchar(255) NOT NULL,
+  `img` text NOT NULL,
   `description` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -85,10 +94,10 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `created`, `updated`, `name`, `description`) VALUES
-(1, '2025-02-16 08:05:47', NULL, 'men', 'men\'s wear'),
-(2, '2025-02-16 08:06:07', NULL, 'women', 'women clothing'),
-(3, '2025-02-16 08:06:25', NULL, 'Kid', 'Kids apparel');
+INSERT INTO `category` (`id`, `created`, `updated`, `name`, `img`, `description`) VALUES
+(1, '2025-02-16 08:05:47', '0000-00-00 00:00:00', 'men', 'category-3511740900391l9.jpg', 'men\'s wear'),
+(2, '2025-02-16 08:06:07', '0000-00-00 00:00:00', 'women', 'category-3511740900375h3.jpg', 'women clothing'),
+(3, '2025-02-16 08:06:25', '0000-00-00 00:00:00', 'Kid', 'category-3491740900226km.jpg', 'Kids apparel');
 
 -- --------------------------------------------------------
 
@@ -143,7 +152,8 @@ INSERT INTO `members` (`id`, `created`, `updated`, `fullname`, `email`, `mobno`,
 (1, '2025-02-16 07:51:22', NULL, 'Ujala', 'ujala@mail.co', '', 0, '123456'),
 (2, '2025-02-16 07:53:03', NULL, 'Neha', 'neha@mail.co', '', 0, '123456'),
 (3, '2025-02-16 07:54:00', NULL, 'Kabir', 'kabir@mail.co', '', 0, '123456'),
-(4, '2025-02-16 07:55:13', NULL, 'Admin', 'admin@mail.co', '', 1, '123456');
+(4, '2025-02-16 07:55:13', NULL, 'Admin', 'admin@mail.co', '', 1, '123456'),
+(5, '2025-03-02 07:34:14', NULL, 'Mohini', 'mohini@mail.co', '', 0, '123456');
 
 -- --------------------------------------------------------
 
@@ -201,7 +211,9 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `created`, `updated`, `customer`, `product`, `size`, `quantity`, `billtoken`) VALUES
 (1, '2025-02-16 08:37:40', NULL, 1, 6, 'M', 2, '1'),
-(2, '2025-02-16 08:47:02', NULL, 1, 6, 'XL                                                  <input type=\"hidden\" id=\"size\" value=\"XL\">', 1, '2');
+(2, '2025-02-16 08:47:02', NULL, 1, 6, 'XL                                                  <input type=\"hidden\" id=\"size\" value=\"XL\">', 1, '2'),
+(3, '2025-03-02 07:40:25', NULL, 5, 6, 'XL                                                  <input type=\"hidden\" id=\"size\" value=\"XL\">', 1, '3'),
+(4, '2025-03-02 07:40:25', NULL, 5, 4, 'XL                                                  <input type=\"hidden\" id=\"size\" value=\"XL\">', 1, '3');
 
 -- --------------------------------------------------------
 
@@ -403,19 +415,19 @@ ALTER TABLE `wishes`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `checkout`
@@ -433,7 +445,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -445,7 +457,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
