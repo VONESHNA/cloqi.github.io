@@ -33,7 +33,7 @@ $latestproduct=$products[0]['id'];
             	<!--Desktop Logo-->
                 <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
                     <a href="./index">
-                    	<img src="./VID-20250112-WA0055_026-removebg-preview.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    	<img src="<?php echo $logoWhite;//echo $logoBlack;?>" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                     </a>
                 </div>
                 <!--End Desktop Logo-->
@@ -70,7 +70,7 @@ $latestproduct=$products[0]['id'];
                 	<div class="site-cart">
                     	<a href="./cartlist" class="site-header__cart" title="Cart">
                         	<i class="icon anm anm-bag-l"></i>
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php echo $items;?></span>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php if(isset($items)){echo $items;}?></span>
                         </a>
                         <!--Minicart Popup-->
                       <?php include_once './minicartpopup.php';?>
@@ -568,25 +568,8 @@ $latestproduct=$products[0]['id'];
                 </div>
                 <!--End Footer Links-->
                 <hr>
-                <div class="footer-bottom">
-                	<div class="row">
-                    	<!--Footer Copyright-->
-	                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left"><span></span> <a href="templateshub.net"> CLIOQ </a></div>
-                        <!--End Footer Copyright-->
-                        <!--Footer Payment Icon-->
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
-                        	<ul class="payment-icons list--inline">
-                        		<li><i class="icon fa fa-cc-visa" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-mastercard" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-discover" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-paypal" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-amex" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-credit-card" aria-hidden="true"></i></li>
-                            </ul>
-                        </div>
-                        <!--End Footer Payment Icon-->
-                    </div>
-                </div>
+             <?php include_once 'footer.php';?>
+
             </div>
         </div>
     </footer>
