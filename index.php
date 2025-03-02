@@ -23,6 +23,18 @@ foreach ($categories as $k => $v) {
 $pds=Dbops::getProduct($con);
 $pds['n']>0?$products=$pds['f']:$products=[];
 $latestproduct=$products[0]['id'];
+for($i=0;$i<4;$i++)
+{   $productId = $products[$i]['id'];
+    $productName = $products[$i]['name'];
+    $sellingPrice = $products[$i]['sellingprice'];
+    !empty($products[$i]['image_1'])?$productImage = customerproduct.$products[$i]['image_1']:'';
+    !empty($products[$i]['image_2'])?$productImage = customerproduct.$products[$i]['image_2']:'';
+    !empty($products[$i]['image_3'])?$productImage = customerproduct.$products[$i]['image_3']:'';
+    !empty($products[$i]['image_4'])?$productImage = customerproduct.$products[$i]['image_4']:'';
+    !empty($products[$i]['image_5'])?$productImage = customerproduct.$products[$i]['image_5']:'';
+    !empty($products[$i]['image_6'])?$productImage = customerproduct.$products[$i]['image_6']:'';
+
+}
 ?>
 
 
@@ -32,11 +44,7 @@ $latestproduct=$products[0]['id'];
     	<div class="container-fluid">        
             <div class="row align-items-center">
             	<!--Desktop Logo-->
-                <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
-                    <a href="./index">
-                    	<img src="./VID-20250112-WA0055_026-removebg-preview.png" alt="" title=""  height="50px" width="100px" />
-                    </a>
-                </div>
+<?php include_once 'header_logo.php';?>
                 <!--End Desktop Logo-->
                 <div class="col-2 col-sm-3 col-md-3 col-lg-8">
                 	<div class="d-block d-lg-none">
@@ -71,7 +79,7 @@ $latestproduct=$products[0]['id'];
                 	<div class="site-cart">
                     	<a href="./cartlist" class="site-header__cart" title="Cart">
                         	<i class="icon anm anm-bag-l"></i>
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php  echo $items;?></span>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php if(isset($items)){echo $items;} ?></span>
                         </a>
                         <!--Minicart Popup-->
                                                 <?php include_once './minicartpopup.php';?>
@@ -86,47 +94,21 @@ $latestproduct=$products[0]['id'];
         </div>
     </div>
     <!--End Header-->
+ <div id="page-content" style="background-color: black;">
+        <!--Home slider-->
+        <div class="slideshow slideshow-wrapper pb-section sliderFull">
+            <div class="home-slideshow">
+    <?php include_once 'slider.php'; ?>
 
-    
-
+            </div>
+            </div>
     
 
 
     <!--Body Content-->
     <div id="page-content" style="background-color: black;">
     	<!--Home slider-->
-    	<div class="slideshow slideshow-wrapper pb-section sliderFull">
-        	<div class="home-slideshow">
-            	<div class="slide">
-                	<div class="blur-up lazyload bg-size">
-                        <img class="blur-up lazyload bg-img" data-src="" src="./Women/woman-tshirt-mockup-oversized-0048.png" alt="Shop Our New Collection" title="Shop Our New Collection" />
-                        <div class="slideshow__text-wrap slideshow__overlay classic bottom">
-                            <div class="slideshow__text-content bottom">
-                                <div class="wrap-caption center">
-                                        <h2 class="h1 mega-title slideshow__title">Shop Our New Collection</h2>
-                                        <span class="mega-subtitle slideshow__subtitle">From Hight to low, classic or modern. We have you covered</span>
-                                        <span class="btn"><a href="./product.php"> Shop Now</a></span>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide">
-                	<div class="blur-up lazyload bg-size">
-                        <img class="blur-up lazyload bg-img" data-src="" src="./Women/female-model-wearing-loose-tshirt-mockup-scene1-0259.png" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
-                        <div class="slideshow__text-wrap slideshow__overlay classic bottom">
-                            <div class="slideshow__text-content bottom">
-                                <div class="wrap-caption center">
-                                    <h2 class="h1 mega-title slideshow__title">Summer Collection</h2>
-                                    <span class="mega-subtitle slideshow__subtitle">Save up to 50% off this weekend only</span>
-                                    <span class="btn"><a href="./product.php"> Shop Now</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!--End Home slider-->
         <!--Collection Tab slider-->
         <div class="tab-slider-product section" style="background-color: black;">
@@ -236,7 +218,7 @@ for($i=0;$i<4;$i++)
         <div class="collection-box section" style="background-color: black;">
         	<div class="container-fluid" style="background-color: black;">
 				<div class="collection-grid" style="background-color: rgb(3, 3, 3);">
-                    <?php foreach($catids AS $K=>$v){
+                    <?php foreach($catids AS $k=>$v){
                      $data=['con'=>$con, 'catid'=>$v];
                      $catp=Dbops::getProductByCategoryId($data);$catp['n']>0?$catproduct=$catp['f']:$catproduct=[];
                          !empty($catproduct['image_1'])?$productImage = customerproduct.$catproduct['image_1']:'';
@@ -246,10 +228,12 @@ for($i=0;$i<4;$i++)
     !empty($catproduct['image_5'])?$productImage = customerproduct.$catproduct['image_5']:'';
     !empty($catproduct['image_6'])?$productImage = customerproduct.$catproduct['image_6']:'';
     $categoryname=$catproduct['categoryname'];
+
+    $categoryImage=customercategory.$catproduct['categoryimage'];
                      ?>
                         <div class="collection-grid-item">
                             <a href="product_category" class="collection-grid-item__link">
-                                <img data-src="" src="<?php echo $productImage;?>" alt="Fashion" class="blur-up lazyload"/>
+                                <img data-src="" src="<?php echo $categoryImage;//echo $productImage;?>" alt="Fashion" class="blur-up lazyload"/>
                                 <div class="collection-grid-item__title-wrapper">
                                     <h3 class="collection-grid-item__title btn btn--secondary no-border"><?php echo $categoryname;?></h3>
                                 </div>
@@ -368,25 +352,7 @@ for($i=0;$i<4;$i++)
                 </div>
                 <!--End Footer Links-->
                 <hr>
-                <div class="footer-bottom">
-                	<div class="row">
-                    	<!--Footer Copyright-->
-	                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left"><span></span> <a href="">CLIOQ</a></div>
-                        <!--End Footer Copyright-->
-                        <!--Footer Payment Icon-->
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
-                        	<ul class="payment-icons list--inline">
-                        		<li><i class="icon fa fa-cc-visa" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-mastercard" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-discover" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-paypal" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-amex" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-credit-card" aria-hidden="true"></i></li>
-                            </ul>
-                        </div>
-                        <!--End Footer Payment Icon-->
-                    </div>
-                </div>
+<?php include_once 'footer.php';?>
             </div>
         </div>
     </footer>

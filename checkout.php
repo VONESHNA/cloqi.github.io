@@ -12,6 +12,9 @@ $data=['con'=>$con, 'customer'=>$customer];
   $cartnf['n']>0?$cart=$cartnf['f']:$cart=[];
   $items=$cartnf['n'];
 
+}else{
+
+ // echo "<script>window.location='./offline.jpg'</script>";
 }
 
 
@@ -27,7 +30,7 @@ $latestproduct=$products[0]['id'];
             	<!--Desktop Logo-->
                 <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
                     <a href="./index">
-                    	<img src="./VID-20250112-WA0055_026.jpg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    	<img src="<?php echo $logoWhite;//echo $logoBlack;?>" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                     </a>
                 </div>
                 <!--End Desktop Logo-->
@@ -61,7 +64,7 @@ $latestproduct=$products[0]['id'];
                 	<div class="site-cart">
                     	<a href="./cartlist" class="site-header__cart" title="Cart">
                         	<i class="icon anm anm-bag-l"></i>
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php  echo $items;?></span>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php if(isset($items)){ echo $items;} ?></span>
                         </a>
                         <!--Minicart Popup-->
                         <?php include_once './minicartpopup.php';?>
@@ -333,7 +336,7 @@ $latestproduct=$products[0]['id'];
                                     </div>
                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                         <label for="input-telephone" style="color: rgb(248, 250, 252);">Contact No. <span class="required-f">*</span></label>
-                                        <input name="contact" value="" id="input-telephone" type="tel">
+                                        <input name="contact" value="" id="input-telephone" type="tel" required>
                                     </div>
                                 </div>
                             </fieldset>
@@ -342,21 +345,21 @@ $latestproduct=$products[0]['id'];
                                 <div class="row">
                                     <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                         <label for="input-company" style="color: rgb(248, 250, 252);">Landmark</label>
-                                        <input name="landmark" value="" id="input-company" type="text">
+                                        <input name="landmark" value="" id="input-company" type="text" required>
                                     </div>
                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                         <label for="input-address-1" style="color: rgb(248, 250, 252);">Address <span class="required-f">*</span></label>
-                                        <input name="address" value="" id="input-address-1" type="text">
+                                        <input name="address" value="" id="input-address-1" type="text" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                         <label for="input-city" style="color: rgb(248, 250, 252);">City <span class="required-f">*</span></label>
-                                        <input name="city" value="" id="input-city" type="text">
+                                        <input name="city" value="" id="input-city" type="text" required>
                                     </div>
                                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                         <label for="input-postcode" style="color: rgb(248, 250, 252);">Pin Code <span class="required-f">*</span></label>
-                                        <input name="pincode" value="" id="input-postcode" type="text">
+                                        <input name="pincode" value="" id="input-postcode" type="text" required>
                                     </div>
                                 </div> 
                                 <!-- <div class="row">
@@ -432,6 +435,7 @@ $latestproduct=$products[0]['id'];
                                        <?php
                           $i=0;
                           $subtotal=0;
+                          if(isset($cart)){
 foreach($cart as $K=>$v){
   $cartid=$v['id'];
   $productName=$v['productname'];
@@ -457,7 +461,7 @@ foreach($cart as $K=>$v){
                                             <td style="color: rgb(248, 250, 252); background-color: black;">1</td>
                                             <td style="color: rgb(248, 250, 252); background-color: black;">&#8377;<?php echo $total;?></td>
                                         </tr>
-                                          <?php }?>
+                                          <?php } }?>
                                       <!--   <tr>
                                             <td class="text-left" style="color: rgb(248, 250, 252); background-color: black;">Argon Sweater</td>
                                             <td style="color: rgb(248, 250, 252); background-color: black;">$199</td>
@@ -673,25 +677,7 @@ foreach($cart as $K=>$v){
                 </div>
                 <!--End Footer Links-->
                 <hr>
-                <div class="footer-bottom">
-                	<div class="row">
-                    	<!--Footer Copyright-->
-	                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left"><span></span> <a href=""> CLIOQ </a></div>
-                        <!--End Footer Copyright-->
-                        <!--Footer Payment Icon-->
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
-                        	<ul class="payment-icons list--inline">
-                        		<li><i class="icon fa fa-cc-visa" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-mastercard" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-discover" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-paypal" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-cc-amex" aria-hidden="true"></i></li>
-                                <li><i class="icon fa fa-credit-card" aria-hidden="true"></i></li>
-                            </ul>
-                        </div>
-                        <!--End Footer Payment Icon-->
-                    </div>
-                </div>
+<?php include_once 'footer.php';?>
             </div>
         </div>
     </footer>

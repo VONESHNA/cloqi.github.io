@@ -59,7 +59,7 @@ $latestproduct=$products[0]['id'];
                 	<div class="site-cart">
                     	<a href="./cartlist" class="site-header__cart" title="Cart">
                         	<i class="icon anm anm-bag-l"></i>
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php  echo $items;?></span>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"><?php  if(isset($items)){echo $items;} ?></span>
                         </a>
                         <!--Minicart Popup-->
 <?php include_once './minicartpopup.php';?>
