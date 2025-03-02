@@ -4,8 +4,9 @@
 if (isset($_POST["register"])) {
   $name = Dbops::getinput($_POST["name"]);
   $description = Dbops::getinput($_POST["description"]);
+    $_FILES['img']['size']>0?$img=Fileops::categoryimageup('img'):$img='';
   $created =dateTime;
-  $data   =   ['con'=>Con::connect(), 'name'=>$name, 'description'=>$description, 'created'=>$created];
+  $data   =   ['con'=>Con::connect(), 'name'=>$name, 'img'=>$img, 'description'=>$description, 'created'=>$created];
    if(Dbops::saveCategory($data)>0)
    {
        echo "<script>
@@ -21,10 +22,11 @@ if (isset($_POST["register"])) {
 
 if (isset($_POST["update"])) {
   $name = Dbops::getinput($_POST["name"]);
+  $_FILES['img']['size']>0?$img=Fileops::categoryimageup('img'):$img='';
   $description = Dbops::getinput($_POST["description"]);
   $edit = Dbops::getinput($_POST["edit"]);
   $updated =dateTime;
-  $data   =   ['con'=>Con::connect(), 'edit'=>$edit, 'name'=>$name,  'description'=>$description,  'updated'=>$updated];
+  $data   =   ['con'=>Con::connect(), 'edit'=>$edit, 'name'=>$name, 'img'=>$img, 'description'=>$description,  'updated'=>$updated];
   if(Dbops::updateCategory($data)>0)
   {
       echo "<script>
@@ -82,7 +84,7 @@ $cats['n']>0?$categories=$cats['f']:$categories=[];
     <h3 class="fw-bold">Category</h3>
 
     <!-- Login Form-->
-    <form class="mt-4" method="post" action=""> 
+    <form class="mt-4" method="post"  enctype="multipart/form-data" action=""> 
       <div class="form-group">
         <!-- <label class="form-label" for="login-email">Email address</label>
         <input type="email" class="form-control" id="login-email" placeholder="name@email.com"> -->
@@ -92,12 +94,28 @@ $cats['n']>0?$categories=$cats['f']:$categories=[];
         Category Name</label>
         <input type="text" name="name" minlength="3" class="form-control" id="login-password" placeholder="Enter Category" <?php if(isset($_REQUEST['edit'])){?> value="<?php if(isset($catEdit)){echo $catEdit['name'];}?>"<?php }?> required>
       </div>
+
+
+      <div class="form-group">
+
+       <label for="login-password" class="form-label d-flex justify-content-between align-items-center">Category Image</label>
+
+       <input type="file" class="form-control" name="img" accept="image/png, image/jpeg, image/jpg">
+
+
+      </div>
+
+
+
       <div class="form-group">
 
       <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
         Category Desciption</label>
          <textarea name="description" minlength="3" class="form-control" > <?php if(isset($_REQUEST['edit'])){?> <?php if(isset($catEdit)){echo $catEdit['description'];}?><?php }?> </textarea>
       </div>
+
+
+
 
     <?php if(isset($_REQUEST['edit'])){?>
       <input type="hidden" name="edit" value="<?php echo $edit; ?>">
@@ -140,7 +158,8 @@ $cats['n']>0?$categories=$cats['f']:$categories=[];
     <tr>
       <td><br/><br/>S. No. &nbsp; &nbsp; &nbsp;</td>
       <td><br/><br/> Category &nbsp; &nbsp; &nbsp;</td>
-      <td><br/><br/> Description &nbsp; &nbsp; &nbsp;</td>
+      <!-- <td><br/> Images </td> -->
+      <td><br/> Description &nbsp; &nbsp; &nbsp;</td>
       <td>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Action</td>
     </tr>
   </thead>
@@ -148,13 +167,18 @@ $cats['n']>0?$categories=$cats['f']:$categories=[];
     <?php $i=0;foreach($categories as $k=>$v){
       ++$i; 
       $category = $v['name'];
+      $img = admincategory.$v['img'];
       $description = $v['description'];
       $edit=$v['id'];
       $delete=$v['id'];
       ?>
     <tr>
       <td><?php echo $i;?></td>
-      <td><?php echo  $category;?></td>
+      <td><br/><br/><p><?php echo  $category;?></p>
+      <a href="<?php echo  $img;?>"  target="_blank"><img src="<?php echo  $img;?>" width="50px;">
+        </a> 
+
+      </td>
       <td><?php echo  $description;?></td>
       <td> &nbsp; &nbsp; &nbsp;<a href="?edit=<?php echo $edit;?>" >edit</a> </td>
       <td> &nbsp;<a href="?delete=<?php echo $delete;?>"  style="color:red;" onclick="return confirm('sure, delete this entry ?')">delete</a></td>

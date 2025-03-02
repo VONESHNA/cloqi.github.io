@@ -1,4 +1,5 @@
 <?php require_once './header.php'; ?>
+<?php $module =explode('/admin/',explode('.php',$_SERVER['SCRIPT_NAME'])[0])[1];?>
 <!doctype html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
     </noscript>
 
     <!-- Page Title -->
-    <title>Manage Catrgory</title>
+    <title>Manage <?php echo $module;?></title>
     
 </head>
 <body class="">
