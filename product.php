@@ -43,7 +43,7 @@ $pds['n']>0?$products=$pds['f']:$products=[];
                     <!--Desktop Logo-->
                     <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
                         <a href="./index">
-                            <img src="./VID-20250112-WA0055_026.jpg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                            <img src="<?php echo $logoWhite;//echo $logoBlack;?>" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                         </a>
                     </div>
                     <!--End Desktop Logo-->
@@ -820,14 +820,8 @@ $pds['n']>0?$products=$pds['f']:$products=[];
                 </div>
                 <!--End Footer Links-->
                 <hr>
-                <div class="footer-bottom">
-                	<div class="row">
-                    	<!--Footer Copyright-->
-	                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left"><span></span> <a href="">CLIOQ</div>
-                        <!--End Footer Copyright-->
+                <?php include_once 'footer.php';?>
 
-                    </div>
-                </div>
             </div>
         </div>
     </footer>
